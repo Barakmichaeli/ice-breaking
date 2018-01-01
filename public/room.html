@@ -6,38 +6,75 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="stylesheets/style.css">
+    <link rel="stylesheet" href="../stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
 </head>
 <body>
+
 <nav class="navbar fixed-top navbar-inverse bg-inverse">
     <input type="text" class="input-url input-lg">
     <input type="button" class="btn btn-info " value="Copy URL">
 </nav>
 
-<div class="loading">
-    <img src="giphy.gif" alt="">
+<div class="content">
+    <div style="display:none" class="introduce">
+        <h1>Welcome ;)</h1>
+        <p>Our game will let you introduce each other in a special way.</p>
+        <p>Your goal is to be creative and let your date know you better.</p>
+        <div class="rules">
+            <br>
+            <h3>The Rules:</h3>
+            <p>On each turn are you going to present a question about yourself with 3 different answers.</p>
+            <p>One of the possible answers is true and the others are fake.</p>
+            <p>Your date need to guess which one is the true answer.</p>
+        </div>
+        <br>
+        <button type="button" class="btn btn-primary btn-lg btn-start">Start</button>
+    </div>
+
+    <div style="display: none" class="questions-form">
+        <div class="form-group">
+            <label for="question">The Question:</label>
+            <input type="text" class="form-control" id="question">
+        </div>
+        <div style="margin-top: 20px" class="form-group">
+            <label for="answer-a">Answer 1</label>
+            <input type="text" class="form-control" id="answer-a">
+        </div>
+        <div class="form-group">
+            <label for="answer-b">Answer 2</label>
+            <input type="text" class="form-control" id="answer-b">
+        </div>
+        <div class="form-group">
+            <label for="answer-c">The Right Answer</label>
+            <input type="text" class="form-control" id="answer-c">
+        </div>
+        <input type="submit" class="btn btn-lg btn-submit" value="Send">
+    </div>
+
+
+    <div style="display: none" class="answers-form">
+        <h1>What is my favorite color?</h1>
+        <button id="1" type="button" class="btn  btn-lg btn-answer" style="background-color:#1b6d85">Barak</button>
+        <button id="2" type="button" class="btn  btn-lg btn-answer" style="background-color: #08E99F">BARAK MICHAELI THE
+            KING
+        </button>
+        <button id="3" type="button" class="btn  btn-lg btn-answer" style="background-color: red">none</button>
+    </div>
+
+    <!--Dynamic images-->
+    <div style="display: none" class="loading">
+        <img src="../images/giphy.gif" alt="">
+    </div>
+
+    <div style="display: none" class="goodcouple">
+        <img src="../images/goodcouple.gif" alt="">
+    </div>
+
+    <div style="display: none" class="badcouple">
+        <img src="../images/badcouple.gif" alt="">
+    </div>
 </div>
-
-<script>
-    $(".input-url").val(window.location);
-    $(".btn-info").click(function () {
-        $(".input-url").select();
-        document.execCommand("copy");
-    });
-
-    function waitOpponent() {
-        setTimeout(function () {
-            if (false) {
-                $(".loading").fadeOut("slow");
-            }
-        }, 5000);
-    }
-
-    $(function () {
-        waitOpponent();
-    });
-
-</script>
+<script src="../javascripts/room.js"></script>
 </body>
 </html>

@@ -3,11 +3,6 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var app = express();
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
@@ -27,18 +22,16 @@ app.get('/createRoom', function (req, res, next) {
 /* GET new rooms */
 app.get("/room/:num", function (req, res) {
     var roomNumber = req.params.num;
-
     //Room doesn't exists or full
     if (!rooms[roomNumber] || rooms[roomNumber]['counter'] > 2) {
         console.log("cant access");
         res.redirect('/');
     }
-
     //New member trying to connect the room
     if (!isRegistered(req.cookies, roomNumber)) {
         var cookie = ++rooms[roomNumber]['counter'];
         rooms[roomNumber]['cookie'] = cookie;
-        res.cookie(COOKIE_NAME , cookie, {
+        res.cookie(COOKIE_NAME, cookie, {
             expires: new Date(Date.now() + 900000),
             path: '/room/' + roomNumber,
             httpOnly: true
@@ -46,6 +39,36 @@ app.get("/room/:num", function (req, res) {
     }
     res.sendFile(path.join(__dirname, '/public', 'room.html'));
 });
+
+// api
+app.get('/api/connection', function (req, res) {
+    res.status(200);
+    res.end();
+});
+
+
+app.get('/api/question', function (req, res) {
+    res.status(200);
+    res.json({
+        question: 'What is my favorite food?',
+        answer_a: "a",
+        answer_b: "b",
+        answer_c: "c",
+        answer: "1"
+    });
+});
+
+
+app.get('/api/result', function (req, res) {
+    res.status(200);
+    res.end();
+});
+
+app.post('/api/sendquestion', function (req, res) {
+    res.status(200);
+    res.end();
+});
+
 
 function isRegistered(cookies, room) {
     var uid = parseInt(cookies[COOKIE_NAME]);
@@ -62,12 +85,10 @@ app.use(function (req, res, next) {
 
 // error handler
 app.use(function (err, req, res, next) {
-    // set locals, only providing error in development
     res.locals.message = err.message;
     res.locals.error = req.app.get('env') === 'development' ? err : {};
-    // render the error page
     res.status(err.status || 500);
-    res.render('error');
+    res.json({msg: "ERROR"})
 });
 
 module.exports = app;

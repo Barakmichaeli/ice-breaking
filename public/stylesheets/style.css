@@ -9,12 +9,22 @@
     margin-bottom: 0px;
 }
 
-.btn-info , .btn-info:hover , .btn-info:active {
+.btn-info  , .btn-start , .btn-submit {
     background-color: #08E99F;
     border-color: #08E99F ;
     font-weight: bold;
     height: 55px;
     border-radius: 21px;
+}
+
+.your_result{
+    float: left;
+    margin: 100px;
+}
+
+.date_result{
+    float: right;
+    margin: 100px;
 }
 
 .navbar {
@@ -27,15 +37,56 @@ body{
     background-color: black;
 }
 
-.loading{
+.content , .questions-form{
+    color: white;
     text-align: center;
 }
 
-img{
+.form-control{
+    width: 50%;
+    margin-bottom: 4%;
+}
+
+.form-group{
+    text-align: -webkit-center;
+}
+
+.introduce{
+    display: inline-block;
+}
+
+.rules{
+    text-align: left;
+    margin-bottom: 50px;
+}
+
+
+.loading , .goodcouple{
+    text-align: center;
+}
+
+
+.loading > img{
     width: 800px;
     height: 600px;
 }
 
+.goodcouple >img , .badcouple > img{
+    width: 800px;
+    height: 400px;
+    margin-top: 5%;
+}
+
 .navbar-inverse  {
     background-color: black;
+}
+
+.answers-form h1{
+    font-size: 60px;
+    font-weight: bolder;
+}
+
+.btn-answer{
+    width: 60%;
+    margin: 3%;
 }
