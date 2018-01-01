@@ -8,61 +8,50 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-// app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 const COOKIE_NAME = "DatingGames";
-// uncomment after placing your favicon in /public
-var roomsCounter = 1;
-var rooms = {};
+var rooms = [];
+var roomsCounter = 0;
 
 //Redirect
 app.get('/createRoom', function (req, res, next) {
     rooms[roomsCounter] = {'counter': 0};
-    res.redirect(302, "/room/" + (roomsCounter++));
+    var tmp = roomsCounter++;
+    res.redirect(302, "/room/" + (tmp));
 });
 
 /* GET new rooms */
-app.get("/room/:num", function (req, res, next) {
-    var room = req.params.num;
-    //No room OR room full
-    if (!rooms[room] || rooms[room]['counter'] > 1) {
+app.get("/room/:num", function (req, res) {
+    var roomNumber = req.params.num;
+
+    //Room doesn't exists or full
+    if (!rooms[roomNumber] || rooms[roomNumber]['counter'] > 2) {
+        console.log("cant access");
         res.redirect('/');
     }
 
-    //One of the opponents reconnect
-    // console.log(req.cookies);
-    if (!isRegistered(req.cookies, room)) {
-        console.log("here");
-        //register new member
-        var counter = ++rooms[room]['counter']; //opponent k
-        rooms[room]['opponent' + counter] = counter; //opponentk : k
-        res.cookie(COOKIE_NAME, counter, {
+    //New member trying to connect the room
+    if (!isRegistered(req.cookies, roomNumber)) {
+        var cookie = ++rooms[roomNumber]['counter'];
+        rooms[roomNumber]['cookie'] = cookie;
+        res.cookie(COOKIE_NAME , cookie, {
             expires: new Date(Date.now() + 900000),
-            path: '/room/' + room,
+            path: '/room/' + roomNumber,
             httpOnly: true
         });
     }
-    res.sendFile(path.join(__dirname, '/views', 'room.html'));
+    res.sendFile(path.join(__dirname, '/public', 'room.html'));
 });
-
 
 function isRegistered(cookies, room) {
     var uid = parseInt(cookies[COOKIE_NAME]);
-    return (uid && (uid === rooms[room]['opponent1']
-        || uid === rooms[room]['opponent2']));
+    return (uid && (uid === rooms[room]['cookie']
+        || uid === rooms[room]['cookie']));
 }
-
-
-app.get("/dissconnect",function(req,res,next){
-
-
-});
-
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

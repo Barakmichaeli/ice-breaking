@@ -1,8 +1,41 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+.input-lg {
+    width: 75%;
+    margin-left: 10%;
+    height: 39px;
+    border-radius : 50px;
 }
 
-a {
-  color: #00B7FF;
+.navbar{
+    margin-bottom: 0px;
+}
+
+.btn-info , .btn-info:hover , .btn-info:active {
+    background-color: #08E99F;
+    border-color: #08E99F ;
+    font-weight: bold;
+    height: 55px;
+    border-radius: 21px;
+}
+
+.navbar {
+    line-height: 4.7;
+}
+
+body{
+    font-family: 'Montserrat', sans-serif;
+    overflow-y: hidden;
+    background-color: black;
+}
+
+.loading{
+    text-align: center;
+}
+
+img{
+    width: 800px;
+    height: 600px;
+}
+
+.navbar-inverse  {
+    background-color: black;
 }

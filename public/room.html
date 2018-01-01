@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar fixed-top navbar-inverse bg-inverse">
+    <input type="text" class="input-url input-lg">
+    <input type="button" class="btn btn-info " value="Copy URL">
+</nav>
+
+<div class="loading">
+    <img src="giphy.gif" alt="">
+</div>
+
+<script>
+    $(".input-url").val(window.location);
+    $(".btn-info").click(function () {
+        $(".input-url").select();
+        document.execCommand("copy");
+    });
+
+    function waitOpponent() {
+        setTimeout(function () {
+            if (false) {
+                $(".loading").fadeOut("slow");
+            }
+        }, 5000);
+    }
+
+    $(function () {
+        waitOpponent();
+    });
+
+</script>
+</body>
+</html>
