@@ -8,6 +8,6 @@ Instructions :
 (Assuming nodejs and npm are installed)
 1. extract the files into a directory
 2. run the command "npm install"
-3. start the application by the command "npm start"
+3. start the application by command "npm start"
 4. enter the address http://localhost:3000/
 5. enjoy the demonstration
