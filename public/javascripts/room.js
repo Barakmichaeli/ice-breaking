@@ -80,7 +80,6 @@ function waitOpponent(callback) {
     $(".loading").toggle("slow");
 
     var interval = setInterval(function () {
-        console.log("ajax call");
         $.get("../api/connection")
             .done(function (data) {
                 clearInterval(interval);
@@ -101,7 +100,6 @@ function waitOpponent(callback) {
 var ans = 0;
 
 function waitForQuestion(callback) {
-    console.log("wait for question");
     var interval = setInterval(function () {
         //ajax calls for question
         $.get("../api/question")
