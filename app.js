@@ -32,7 +32,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 /**
  *  Global variables
  */
-const COOKIE_NAME = "DatingGames";
+const COOKIE_NAME = "IceBreaker";
 var rooms = [];
 var roomsCounter = 0;
 
@@ -92,7 +92,6 @@ app.get('/api/connection', function (req, res) {
 
 var questionNum = 0;
 app.get('/api/question', function (req, res) {
-    res.status(200);
     var questions = [{
         question: 'What do we usually have for dinner on friday?',
         answer_a: "We go out for a diffrent restraunt each week",
@@ -115,6 +114,7 @@ app.get('/api/question', function (req, res) {
     }];
     questionNum = (++questionNum) % 3;
     res.json(questions[questionNum]);
+    res.status(200);
 });
 
 

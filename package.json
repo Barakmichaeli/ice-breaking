@@ -1,6 +1,6 @@
 {
-  "name": "datinggames",
-  "version": "0.0.0",
+  "name": "ice-breaking",
+  "version": "1.0.0",
   "private": false,
   "scripts": {
     "start": "node ./app "

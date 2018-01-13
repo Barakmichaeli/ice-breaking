@@ -33,8 +33,6 @@ $(".btn-submit").click(function (e) {
             waitForResult();
         }).fail(function () {
         alert("error");
-        //error connect send the data to the server
-//            $(".btn-submit").trigger("click");
     });
 });
 
@@ -96,8 +94,6 @@ function waitOpponent(callback) {
                 }
             })
             .fail(function () {
-                //block after some attemps?
-//                    alert("fail");
             });
     }, 5000);
 }
