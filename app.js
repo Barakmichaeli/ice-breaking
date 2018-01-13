@@ -1,17 +1,45 @@
 var express = require('express');
+var app = express();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(3000, function () {
+    console.log('listening on *:3000');
+});
+
+//DONT WORK
+io.sockets.on('connection', function (socket) {
+    console.log("sd");
+});
+
+/**
+ * External modules
+ */
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var app = express();
+
+
+/**
+ * External middlewares
+ */
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+/**
+ *  Global variables
+ */
 const COOKIE_NAME = "DatingGames";
 var rooms = [];
 var roomsCounter = 0;
 
+
+/**
+ * API
+ */
 //Redirect
 app.get('/createRoom', function (req, res, next) {
     rooms[roomsCounter] = {'counter': 0};
@@ -27,35 +55,66 @@ app.get("/room/:num", function (req, res) {
         console.log("cant access");
         res.redirect('/');
     }
+
     //New member trying to connect the room
     if (!isRegistered(req.cookies, roomNumber)) {
         var cookie = ++rooms[roomNumber]['counter'];
-        rooms[roomNumber]['cookie'] = cookie;
-        res.cookie(COOKIE_NAME, cookie, {
+
+
+        rooms[roomNumber]['opponent' + cookie] = {
+            cookie: cookie,
+            isActive: true,
+            socket: req.socket
+        };
+
+        res.set('Connection', 'keep-alive');
+        res.cookie("room", roomNumber, {
             expires: new Date(Date.now() + 900000),
-            path: '/room/' + roomNumber,
+            path: '/',
             httpOnly: true
         });
+        res.cookie(COOKIE_NAME, cookie, {
+            expires: new Date(Date.now() + 900000),
+            path: '/',
+            httpOnly: true
+        });
+
     }
+
     res.sendFile(path.join(__dirname, '/public', 'room.html'));
 });
 
-// api
 app.get('/api/connection', function (req, res) {
     res.status(200);
     res.end();
 });
 
 
+var questionNum = 0;
 app.get('/api/question', function (req, res) {
     res.status(200);
-    res.json({
-        question: 'What is my favorite food?',
-        answer_a: "a",
-        answer_b: "b",
-        answer_c: "c",
-        answer: "1"
-    });
+    var questions = [{
+        question: 'What do we usually have for dinner on friday?',
+        answer_a: "We go out for a diffrent restraunt each week",
+        answer_b: "Tasteless Chicken",
+        answer_c: "Morrocan fish",
+        correct_answer : "2"
+
+    },{
+        question: 'What is my favorite vacation location?',
+        answer_a: "The dead sea",
+        answer_b: "My bed",
+        answer_c: "I hate vacations",
+        correct_answer : "2"
+    },{
+        question: 'What is my favorite course in college?',
+        answer_a: "Nothing",
+        answer_b: "Advanced algorithems",
+        answer_c: "The karnaf" ,
+        correct_answer : "3"
+    }];
+    questionNum = (++questionNum) % 3;
+    res.json(questions[questionNum]);
 });
 
 

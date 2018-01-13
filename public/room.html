@@ -38,18 +38,20 @@
             <input type="text" class="form-control" id="question">
         </div>
         <div style="margin-top: 20px" class="form-group">
-            <label for="answer-a">Answer 1</label>
+            <label for="answer-a">Answer 1:</label>
             <input type="text" class="form-control" id="answer-a">
         </div>
         <div class="form-group">
-            <label for="answer-b">Answer 2</label>
+            <label for="answer-b">Answer 2:</label>
             <input type="text" class="form-control" id="answer-b">
         </div>
         <div class="form-group">
-            <label for="answer-c">The Right Answer</label>
+            <label for="answer-c">The Right Answer:</label>
             <input type="text" class="form-control" id="answer-c">
         </div>
-        <input type="submit" class="btn btn-lg btn-submit" value="Send">
+        <input type="submit" class="btn btn-lg btn-submit" value="Send question">
+        <input type="button" class="btn btn-lg btn-generate" value="Generate question">
+
     </div>
 
 
@@ -63,6 +65,7 @@
     </div>
 
     <!--Dynamic images-->
+
     <div style="display: none" class="loading">
         <img src="../images/giphy.gif" alt="">
     </div>
@@ -72,7 +75,7 @@
     </div>
 
     <div style="display: none" class="badcouple">
-        <img src="../images/badcouple.gif" alt="">
+        <img src="../images/wrong.gif" alt="">
     </div>
 </div>
 <script src="../javascripts/room.js"></script>

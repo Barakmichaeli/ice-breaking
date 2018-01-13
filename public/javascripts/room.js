@@ -60,7 +60,22 @@ $(".btn-answer").click(function () {
         answerAnimation.fadeOut('2000', function () {
             $(".questions-form").fadeIn("slow");
         });
-    }, 3000);
+    }, 4000);
+});
+
+
+var questions = [
+    "Where do i study?",
+    "Where was my first kiss?",
+    "What is my middle name?"
+];
+
+var questionNum = 0;
+
+$(".btn-generate").click(function () {
+    questionNum = questionNum % 3;
+    $("#question").val(questions[questionNum]);
+    questionNum++;
 });
 
 function waitOpponent(callback) {
@@ -87,7 +102,7 @@ function waitOpponent(callback) {
     }, 5000);
 }
 
-var ans = 1;
+var ans = 0;
 
 function waitForQuestion(callback) {
     console.log("wait for question");
@@ -101,7 +116,7 @@ function waitForQuestion(callback) {
                 $(".answers-form #1").text(data['answer_a']);
                 $(".answers-form #2").text(data['answer_b']);
                 $(".answers-form #3").text(data['answer_c']);
-                ans = data['answer'];
+                ans = data['correct_answer'];
                 $(".answers-form").toggle("slow");
             })
             .fail(function () {

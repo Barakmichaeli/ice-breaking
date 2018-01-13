@@ -17,7 +17,15 @@
     border-radius: 21px;
 }
 
-.your_result{
+.btn-generate{
+    background-color: darkblue;
+    border-color: darkblue ;
+    font-weight: bold;
+    height: 55px;
+    border-radius: 21px;
+}
+
+  .your_result{
     float: left;
     margin: 100px;
 }
