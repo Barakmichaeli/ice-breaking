@@ -12,7 +12,6 @@ $(".btn-start").click(function () {
 //question form - send question
 $(".btn-submit").click(function (e) {
     //We send our question and wait for result
-    console.log("submit form");
     e.preventDefault();
 
     var question = $("#question").val();
@@ -137,7 +136,6 @@ function waitForResult(callback) {
                 else {
                     $(".badcouple").fadeIn("slow");
                     clearInterval(interval);
-                    console.log("bad answer by date");
                     waitForQuestion(function () {
                         $(".badcouple").fadeOut("slow");
                     });
