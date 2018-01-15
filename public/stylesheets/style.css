@@ -95,6 +95,7 @@ body{
 }
 
 .btn-answer{
+    font-weight: bolder;
     width: 60%;
     margin: 3%;
 }

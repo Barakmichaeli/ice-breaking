@@ -98,7 +98,7 @@ app.get('/api/question', function (req, res) {
         question: 'What is my favorite course in college?',
         answer_a: "Nothing",
         answer_b: "Advanced algorithems",
-        answer_c: "The karnaf" ,
+        answer_c: "Data structures" ,
         correct_answer : "3"
     }];
     questionNum = (++questionNum) % 3;
